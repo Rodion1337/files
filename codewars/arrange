@@ -46,7 +46,6 @@ def arrange3(s):
     return(t)
 
 
-
 def arrange4(s):
     t = c = []
     x = 1
@@ -58,11 +57,111 @@ def arrange4(s):
             t.append(c.pop(-1))
             t.append(c.pop(0))
             x -= 1
-        if len(c) > 1 and len(c) < 4:
+        elif len(c) > 1 and len(c) < 4:
             t.append(c.pop(0))
             t.append(c.pop(-1))
             x -= 1
-        if len(c) == 1:
+        elif len(c) == 1:
             t.append(c.pop(0))
             x -= 1
     return(t)
+
+
+def arrange5(s):
+    t = c = []
+    x = 1
+    c = s.copy()
+    for x in range(1, len(c) + 1):
+        if (len(c) // 12) >= 1:
+            t.append(c.pop(0))
+            t.append(c.pop(-1))
+            t.append(c.pop(-1))
+            t.append(c.pop(0))
+            t.append(c.pop(0))
+            t.append(c.pop(-1))
+            t.append(c.pop(-1))
+            t.append(c.pop(0))
+            t.append(c.pop(0))
+            t.append(c.pop(-1))
+            t.append(c.pop(-1))
+            t.append(c.pop(0))
+            x -= 1
+        elif (len(c) // 8) >= 1:
+            t.append(c.pop(0))
+            t.append(c.pop(-1))
+            t.append(c.pop(-1))
+            t.append(c.pop(0))
+            t.append(c.pop(0))
+            t.append(c.pop(-1))
+            t.append(c.pop(-1))
+            t.append(c.pop(0))
+            x -= 1
+        elif (len(c) // 4) >= 1:
+            t.append(c.pop(0))
+            t.append(c.pop(-1))
+            t.append(c.pop(-1))
+            t.append(c.pop(0))
+            x -= 1
+        elif len(c) == 3:
+            t.append(c.pop(0))
+            t.append(c.pop(-1))
+            t.append(c.pop(-1))
+            x -= 1
+        elif len(c) == 2:
+            t.append(c.pop(0))
+            t.append(c.pop(-1))
+            x -= 1
+        elif len(c) == 1:
+            t.append(c.pop(0))
+            x -= 1
+    return(t)
+
+
+def arrange6(s):
+    t = []
+    if len(s) == 0:
+        return(s)
+    else:
+        t.append(s[0])
+        b = int(len(s))
+        a = 1
+        q = 2
+        n = 1
+        for x in range(0, (b // 4) + 1):
+            step = 4 * n
+            print(a, q, b, step, t, "0")
+            if (b // (step + 1)) >= 1:
+                t.append(s[-a])
+                t.append(s[-q])
+                t.append(s[a])
+                t.append(s[q])
+                a += 2
+                q += 2
+                n += 1
+                print(a, q, b, step, t, "1")
+            elif (b % (step - 2)) == 3:
+                t.append(s[-a])
+                t.append(s[-q])
+                t.append(s[a])
+                print(a, q, b, t, "2*")
+            elif (b % (step - 2)) == 2:
+                t.append(s[-a])
+                t.append(s[-q])
+                print(a, q, b, t, "3*")
+            elif (b % (step - 2)) == 1:
+                t.append(s[-a])
+                print(a, q, b, t, "4*")
+            print(a, q, b, step, t, "break for")
+        if b == 4:
+            t.append(s[-a])
+            t.append(s[-q])
+            t.append(s[a])
+            print(a, q, b, t, "2")
+        elif b == 3:
+            t.append(s[-a])
+            t.append(s[-q])
+            print(a, q, b, t, "3")
+        elif b == 2:
+            t.append(s[-a])
+            print(a, q, b, t, "4")
+        return(t)
